@@ -1,5 +1,7 @@
 SlothBook::Application.routes.draw do
 
+  get "friendships/create"
+  get "friendships/destroy"
   root 'home#index'
 
   get 'log_in'   => 'sessions#new',     :as => 'log_in'
