@@ -12,7 +12,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to user_path(@user), :notice => 'Welcome to SlothBook, #{@user}!'
+      session[:user_id] = @user.id
+      redirect_to newsfeed_path
     else
       render :new
     end

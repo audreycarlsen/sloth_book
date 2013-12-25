@@ -4,12 +4,13 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by(email: params[:email])
+    
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect_to newsfeed_path
     else
-      flash.now.alert = "Invalid email or password"
-      render "new"
+      flash[:error] = 'Invalid email or password.'
+      render new_session_path
     end
   end
 
