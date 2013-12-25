@@ -1,5 +1,12 @@
 SlothBook::Application.routes.draw do
 
+  root 'home#index'
+
+  get 'log_in'   => 'sessions#new',     :as => 'log_in'
+  get 'log_out'  => 'sessions#destroy', :as => 'log_out'
+  get 'newsfeed' => 'users#newsfeed',   :as => 'newsfeed'
+
+  resources :sessions
   resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.
