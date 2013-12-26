@@ -20,6 +20,10 @@
 
 <h1>WELCOME TO SLOTHBOOK!!!</h1>
 
+<% flash.each do |name, msg| %>
+  <%= msg %>
+<% end %>
+
 <%= yield %>
 
 </body>

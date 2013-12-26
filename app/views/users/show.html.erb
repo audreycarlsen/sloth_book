@@ -4,10 +4,15 @@
 <h2>Friends</h2>
 <% @user.friendships.each do |friendship| %>
   <%= friendship.friend.first_name %> <%=friendship.friend.last_name%><br>
+  <%= friendship.status %><br>
+  <%= friendship.id %>
   <%= link_to 'remove', friendship, method: :delete %>
 <% end %>
 
 <h2>Friended by Users</h2>
-<% @user.inverse_friends.each do |user| %>
-  <%= user.first_name %> <%=user.last_name%><br>
+<% @user.inverse_friendships.each do |inverse_friendship| %>
+  <%= inverse_friendship.user.first_name %> <%= inverse_friendship.user.last_name%><br>
+  <%= inverse_friendship.status %><br>
+  <%= inverse_friendship.id %>
+    <%= button_to "Confirm Friend Request", friendship_path(:id => inverse_friendship.id), method: :patch %>
 <% end %>
