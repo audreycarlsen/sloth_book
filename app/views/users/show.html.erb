@@ -6,7 +6,7 @@
   <%= friendship.friend.first_name %> <%=friendship.friend.last_name%><br>
   <%= friendship.status %><br>
   <%= friendship.id %>
-  <%= link_to 'remove', friendship, method: :delete %>
+  <%= link_to 'remove', friendship_path(friendship.id), method: :delete %>
 <% end %>
 
 <h2>Friended by Users</h2>
@@ -14,5 +14,5 @@
   <%= inverse_friendship.user.first_name %> <%= inverse_friendship.user.last_name%><br>
   <%= inverse_friendship.status %><br>
   <%= inverse_friendship.id %>
-    <%= button_to "Confirm Friend Request", friendship_path(:id => inverse_friendship.id), method: :patch %>
+    <%= button_to "Confirm Friend Request", friendship_path(inverse_friendship.id), method: :patch %>
 <% end %>
