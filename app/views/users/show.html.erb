@@ -6,3 +6,8 @@
   <%= friendship.friend.first_name %> <%=friendship.friend.last_name%><br>
   <%= link_to 'remove', friendship, method: :delete %>
 <% end %>
+
+<h2>Friended by Users</h2>
+<% @user.inverse_friends.each do |user| %>
+  <%= user.first_name %> <%=user.last_name%><br>
+<% end %>
