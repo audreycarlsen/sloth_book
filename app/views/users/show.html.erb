@@ -2,6 +2,7 @@
 <p><%= "#{@user.email}" %></p>
 
 <h2>Friends</h2>
-<% @user.friends.each do |friend| %>
-  <%= friend.first_name %> <%=friend.last_name%><br>
+<% @user.friendships.each do |friendship| %>
+  <%= friendship.friend.first_name %> <%=friendship.friend.last_name%><br>
+  <%= link_to 'remove', friendship, method: :delete %>
 <% end %>
