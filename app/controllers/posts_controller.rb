@@ -1,8 +1,9 @@
 class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
-    @user = User.find(params[:id])
-    redirect_to user_path(@user)
+    
+    # FIX REDIRECT
+    redirect_to user_path(16)
   end
 
   private
