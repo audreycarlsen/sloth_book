@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
     @users = User.all
@@ -20,6 +20,12 @@ class UsersController < ApplicationController
   end
 
   def update
+    if @user.update(user_params)
+
+      redirect_to user_path(@user)
+    else
+      render :edit
+    end
   end
 
   def edit
@@ -31,6 +37,18 @@ class UsersController < ApplicationController
   end
 
   def show
+    @post = Post.new
+  end
+
+  def search
+    user_name = params[:search]
+    user = User.where(:name => user_name)
+    if user_id  
+      redirect_to user_path(user.id)   
+    else
+      flash[:notice] = "Sorry, no such sloth exists."
+    end
+
   end
 
   private
@@ -40,6 +58,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :photo_url, :password, :password_confirmation)
   end
 end

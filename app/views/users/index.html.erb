@@ -1,12 +1,23 @@
 <table>
   <% @users.each do |user| %>
     <tr>
-      <td><%= link_to "#{user.first_name} #{user.last_name}", user %></td>
-      <td>[<%= link_to 'Edit', edit_user_path(user) %>]</td>
-      <td>[<%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %>]</td>
-      <% if current_user %>
-        <td><%= button_to "Add Friend", friendships_path(:friend_id => user.id), method: :post %></td>
+
+      <% if user.name != current_user.name %>
+
+        <td><%= link_to "#{user.name}", user %></td>
+
+        <% if user.not_already_friends?(current_user.id) && user.not_already_inverse_friends?(current_user.id) %>
+          <td><%= button_to "Add Friend", friendships_path(:friend_id => user.id), method: :post %></td>
+        <% else %>
+          <td>You are already friends!</td>
+        <% end %>
+
+        <% if current_user.name == 'David Foster Wallace' %>
+          <td>[<%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %>]</td>
+        <% end %>
+
       <% end %>
+
     </tr>
   <% end %>
 </table>

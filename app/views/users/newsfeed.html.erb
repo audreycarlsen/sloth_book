@@ -1,1 +1,12 @@
-This is your newsfeed, fool.
+<p><%= link_to 'Make new slothy friends!', users_path %></p>
+
+<% if current_user.pending_friends.count > 0 %>
+  <p>You have <%= pluralize(current_user.pending_friends.count, 'new slothy friend request') %>!</p>
+
+  <% current_user.inverse_friendships.each do |inverse_friendship| %>
+    <% if inverse_friendship.status == 'pending' %>
+      <%= link_to "#{inverse_friendship.user.name}", user_path(inverse_friendship.user.id) %>
+      <%= button_to "Confirm Friend Request", friendship_path(inverse_friendship.id), method: :patch %><br>
+    <% end %>
+  <% end %>
+<% end %>

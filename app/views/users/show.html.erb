@@ -1,18 +1,50 @@
-<h1><%= "#{@user.first_name} #{@user.last_name}" %></h1>
-<p><%= "#{@user.email}" %></p>
+<div class='profile_info'>
 
-<h2>Friends</h2>
-<% @user.friendships.each do |friendship| %>
-  <%= friendship.friend.first_name %> <%=friendship.friend.last_name%><br>
-  <%= friendship.status %><br>
-  <%= friendship.id %>
-  <%= link_to 'remove', friendship_path(friendship.id), method: :delete %>
-<% end %>
+  <div class='profile_table'>
+    <table>
+      <tr>
+        <td><%= image_tag(@user.photo_url, :class => 'style_image') %> </td>
+        <td>
+          <h1><%= "#{@user.name}" %></h1>
+          <p><%= "#{@user.email}" %></p>
+          <p><%= "#{@user.sex}" %></p>
+        </td>
+      </tr>
+    </table>
+  </div>
 
-<h2>Friended by Users</h2>
-<% @user.inverse_friendships.each do |inverse_friendship| %>
-  <%= inverse_friendship.user.first_name %> <%= inverse_friendship.user.last_name%><br>
-  <%= inverse_friendship.status %><br>
-  <%= inverse_friendship.id %>
-    <%= button_to "Confirm Friend Request", friendship_path(inverse_friendship.id), method: :patch %>
-<% end %>
+  <h2>Friends (<%= @user.friend_count %>)</h2>
+
+  <% @user.friendships.each do |friendship| %>
+    <% if friendship.status == 'accepted' %>
+      <%= link_to "#{friendship.friend.name}", user_path(friendship.friend.id) %> (<%= link_to 'remove', friendship_path(friendship.id), method: :delete %>)<br>
+    <% end %>
+  <% end %>
+
+  <% @user.inverse_friendships.each do |inverse_friendship| %>
+    <% if inverse_friendship.status == 'accepted' %>
+      <%= link_to "#{inverse_friendship.user.name}", user_path(inverse_friendship.user.id) %> <br>
+    <% end %>
+  <% end %>
+
+</div>
+
+<div class='profile_wall'>
+  This is your wall, fool.
+
+  <%= form_for(@post) do |f| %>
+    <% if @post.errors.any? %>
+      <%= pluralize(@post.errors.count, "error") %> prohibited this message from being posted:
+      <ul>
+        <% @post.errors.full_messages.each do |message| %>
+          <li> <%= message %> </li>
+        <% end %> 
+      </ul>
+    <% end %>
+
+    <p><%= f.text_area :content %></p>
+
+    <p><%= f.submit("Onward, to glory!")%></p>
+
+  <% end %>
+</div>

@@ -8,17 +8,19 @@
     </ul>
   <% end %>
   
-  <p>
-    <%= f.text_field :first_name, placeholder: "First Name", :size => 15 %> <%= f.text_field :last_name, placeholder: "Last Name", :size => 15 %></p>
+  <!-- Add labels -->
+  
+  <p><%= f.text_field :name, placeholder: "Name", :size => 34 %></p>
 
   <p><%= f.text_field :email, placeholder: "Your Email", :size => 34 %></p>
+
+  <p><%= f.text_field :photo_url, placeholder: "Profile Picture URL", :size => 34 %></p>
 
   <p><%= f.password_field :password, placeholder: "Password", :size => 34 %></p>
 
   <p><%= f.password_field :password_confirmation, placeholder: "Re-enter Password", :size => 34 %></p>
 
-<!-- Fix radio buttons (add labels) -->
-
+<!-- Make radio buttons work  -->
   <p>
     <%= f.radio_button :sex, "female" %>
     <%= f.label :sex, "Female"%>
@@ -27,6 +29,6 @@
   </p>
 
   <div class="actions">
-    <%= f.submit("Sign Up")%>
+    <%= f.submit("Onward, to glory!")%>
   </div>
 <% end %>
