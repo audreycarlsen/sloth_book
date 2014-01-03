@@ -3,7 +3,7 @@ class PostsController < ApplicationController
     # @user = User.find(params[:id])
     @post = Post.new(post_params)
     @post.save
-    redirect_to user_path(16)
+    redirect_to(:back)
   end
 
   private

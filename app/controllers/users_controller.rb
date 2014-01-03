@@ -40,6 +40,10 @@ class UsersController < ApplicationController
     @post = Post.new
   end
 
+  def newsfeed
+    @post = Post.new
+  end
+
   # def search
   #   user_name = params[:search]
   #   user = User.where(:name => user_name)
