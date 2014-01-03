@@ -10,3 +10,15 @@
     <% end %>
   <% end %>
 <% end %>
+
+<% Post.all.reverse.each do |post| %>
+  <p>
+    <strong><%= post.author %></strong>
+    <% if post.author != post.user.name %> 
+      > <strong><%= post.user.name %></strong>
+    <% end %>
+    <br>
+    <em><%= time_ago_in_words(post.created_at).capitalize %> ago</em><br>
+    <%= post.content %>
+  </p>
+<% end %>
