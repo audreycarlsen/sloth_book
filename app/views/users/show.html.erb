@@ -45,14 +45,17 @@
       <%= f.text_area :content %>
     </p>
 
-    <%= f.hidden_field :recipient_id, :value => @user.id %> 
-    <%= f.hidden_field :author_id, :value => current_user.id %>
+    <%= f.hidden_field :user_id, :value => @user.id %> 
+    <%= f.hidden_field :author, :value => current_user.name %>
 
     <p><%= f.submit("Onward, to glory!")%></p>
   <% end %>
 
-  <% @user.posts.each do |post| %>
-        <%= time_ago_in_words(review.created_at) %> ago, by <strong><%= post.from %>:</strong> </br>
-        <%= post.content %>
+  <% @user.posts.reverse.each do |post| %>
+    <p>
+      <strong><%= post.author %></strong><br>
+      <em><%= time_ago_in_words(post.created_at) %> ago</em><br>
+      <%= post.content %>
+    </p>
     <% end %>
 </div>

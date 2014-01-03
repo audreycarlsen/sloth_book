@@ -54,7 +54,7 @@ h1 {
 }
 
 .profile_wall {
-
+  float:left;
 }
 
 .style_image {
