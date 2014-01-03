@@ -33,4 +33,19 @@ class User < ActiveRecord::Base
   def friend_count
     friendships.where(:status => 'accepted').count + inverse_friendships.where(:status => 'accepted').count
   end
+
+  def find_all_friend_names
+    friend_names = []
+    friendships.each do |friendship|
+      if friendship.status == 'accepted'
+        friend_names << friendship.friend.name
+      end
+    end
+    inverse_friendships.each do |inverse_friendship|
+      if inverse_friendship.status == 'accepted'
+        friend_names << inverse_friendship.user.name
+      end
+    end
+    friend_names
+  end
 end

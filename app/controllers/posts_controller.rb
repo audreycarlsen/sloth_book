@@ -1,8 +1,8 @@
 class PostsController < ApplicationController
   def create
+    # @user = User.find(params[:id])
     @post = Post.new(post_params)
     @post.save
-    # FIX REDIRECT
     redirect_to user_path(16)
   end
 

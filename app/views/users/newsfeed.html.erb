@@ -1,3 +1,7 @@
+<% if current_user.friend_count == 0 %>
+  Welcome to your newsfeed. You currently have no friends!
+<% end %>
+
 <p><%= link_to 'Make new slothy friends!', users_path %></p>
 
 <% if current_user.pending_friends.count > 0 %>
@@ -12,13 +16,15 @@
 <% end %>
 
 <% Post.all.reverse.each do |post| %>
-  <p>
-    <strong><%= post.author %></strong>
-    <% if post.author != post.user.name %> 
-      > <strong><%= post.user.name %></strong>
-    <% end %>
-    <br>
-    <em><%= time_ago_in_words(post.created_at).capitalize %> ago</em><br>
-    <%= post.content %>
-  </p>
+  <% if ( current_user.find_all_friend_names.include?(post.author) || post.author == current_user.name ) && ( current_user.find_all_friend_names.include?(post.user.name) || post.user.name == current_user.name ) %>
+    <p>
+      <strong><%= post.author %></strong>
+      <% if post.author != post.user.name %> 
+        > <strong><%= post.user.name %></strong>
+      <% end %>
+      <br>
+      <em><%= time_ago_in_words(post.created_at).capitalize %> ago</em><br>
+      <%= post.content %>
+    </p>
+  <% end %>
 <% end %>

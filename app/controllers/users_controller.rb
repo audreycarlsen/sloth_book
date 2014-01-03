@@ -40,16 +40,15 @@ class UsersController < ApplicationController
     @post = Post.new
   end
 
-  def search
-    user_name = params[:search]
-    user = User.where(:name => user_name)
-    if user_id  
-      redirect_to user_path(user.id)   
-    else
-      flash[:notice] = "Sorry, no such sloth exists."
-    end
-
-  end
+  # def search
+  #   user_name = params[:search]
+  #   user = User.where(:name => user_name)
+  #   if user_id  
+  #     redirect_to user_path(user.id)   
+  #   else
+  #     flash[:notice] = "Sorry, no such sloth exists."
+  #   end
+  # end
 
   private
 

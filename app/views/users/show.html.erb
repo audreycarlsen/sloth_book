@@ -41,7 +41,12 @@
     <% end %>
 
     <p>
-      <%= f.label :content, "Say something:"%><br>
+      <% if @user.id == current_user.id %>
+        <%= f.label :content, "What's on your mind?"%>
+      <% else %>
+        <%= f.label :content, "Say something..." %>
+      <% end %>
+      <br>
       <%= f.text_area :content %>
     </p>
 
@@ -54,8 +59,8 @@
   <% @user.posts.reverse.each do |post| %>
     <p>
       <strong><%= post.author %></strong><br>
-      <em><%= time_ago_in_words(post.created_at) %> ago</em><br>
+      <em><%= time_ago_in_words(post.created_at).capitalize %> ago</em><br>
       <%= post.content %>
     </p>
-    <% end %>
+  <% end %>
 </div>
