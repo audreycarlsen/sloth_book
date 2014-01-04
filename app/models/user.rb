@@ -10,22 +10,22 @@ class User < ActiveRecord::Base
   has_many :inverse_friendships, :class_name => 'Friendship', :foreign_key => 'friend_id'
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
 
-  def pending_friends_to_respond_to
+  def pending_friendships_to_respond_to
     inverse_friendships.where(:status => 'pending')
   end
 
-  def pending_friendships
-    pending_friendships = []
+  def pending_friendship_names
+    pending_friendship_names = []
 
     friendships.where(:status => 'pending').each do |friendship|
-      pending_friendships << friendship
+      pending_friendship_names << friendship.friend.name
     end
 
     inverse_friendships.where(:status => 'pending').each do |inverse_friendship|
-      pending_friendships << inverse_friendship
+      pending_friendship_names << inverse_friendship.user.name
     end
 
-    pending_friendships
+    pending_friendship_names
   end
 
   def friend_count

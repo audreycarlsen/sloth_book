@@ -11,7 +11,7 @@
 
             <% if current_user.find_all_friend_names.include?(user.name) %>
               Friends
-            <% elsif current_user.pending_friendships.include?(user) %>
+            <% elsif current_user.pending_friendship_names.include?(user.name) %>
               Pending
             <% else %>
               <%= button_to "Add Friend", friendships_path(:friend_id => user.id), method: :post %>
