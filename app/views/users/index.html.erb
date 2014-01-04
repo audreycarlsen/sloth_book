@@ -1,8 +1,10 @@
+<h1>Users</h1>
+
 <% @users.each do |user| %>
 
   <% if user != current_user %>
 
-    <div class='user_box'>
+    <div class='user_box table_padding'>
       <table>
         <tr>
           <td><%= image_tag(user.photo_url, size: '50x50') %></td>

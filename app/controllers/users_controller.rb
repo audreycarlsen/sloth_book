@@ -42,6 +42,7 @@ class UsersController < ApplicationController
 
   def newsfeed
     @post = Post.new
+    @friendship = current_user.inverse_friendships.find(params[:id])
   end
 
   # def search

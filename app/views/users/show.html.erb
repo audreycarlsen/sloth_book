@@ -15,18 +15,31 @@
 
   <h2>Friends (<%= @user.friend_count %>)</h2>
 
-  <% @user.friendships.each do |friendship| %>
-    <% if friendship.status == 'accepted' %>
-      <%= link_to "#{friendship.friend.name}", user_path(friendship.friend.id) %> (<%= link_to 'remove', friendship_path(friendship.id), method: :delete %>)<br>
-    <% end %>
-  <% end %>
+  <div class='table_padding friend_list'>
+    <table>
+      <% @user.friendships.each do |friendship| %>
+        <% if friendship.status == 'accepted' %>
+          <tr>
+            <td><%= image_tag(friendship.friend.photo_url, size: '50x50') %></td>
+            <td>
+              <%= link_to "#{friendship.friend.name}", user_path(friendship.friend.id) %> (<%= link_to 'remove', friendship_path(friendship.id), method: :delete %>)
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
 
-  <% @user.inverse_friendships.each do |inverse_friendship| %>
-    <% if inverse_friendship.status == 'accepted' %>
-      <%= link_to "#{inverse_friendship.user.name}", user_path(inverse_friendship.user.id) %> <br>
-    <% end %>
-  <% end %>
-
+      <% @user.inverse_friendships.each do |inverse_friendship| %>
+        <% if inverse_friendship.status == 'accepted' %>
+          <tr>
+            <td><%= image_tag(inverse_friendship.user.photo_url, size: '50x50') %></td>
+            <td>
+              <%= link_to "#{inverse_friendship.user.name}", user_path(inverse_friendship.user.id) %> 
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </table>
+  </div>
 </div>
 
 <div class='right_box'>
@@ -47,8 +60,10 @@
 
       <p><%= f.submit("Onward, to glory!")%></p>
     <% end %>
+  <% elsif current_user.pending_friendship_names.include?(@user.name) %>
+    Friend request sent.
   <% else %>
-    Send <%= @user.name %> a <%= link_to "friend request", friendships_path(:friend_id => @user.id), method: :post %>.
+    Send <%= @user.name %> a <%= link_to "friend request", friendships_path(:friend_id => @user.id), method: :post %>.<br><br>
   <% end %>
 
   <% @user.posts.reverse.each do |post| %>

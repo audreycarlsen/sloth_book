@@ -65,6 +65,32 @@ h1 {
   width: 150px;
 }
 
+.browse_link {
+  background: orange;
+  border: 1px solid #999999;
+  padding: 10px;
+  width: 100px;
+}
+
+.browse_link:hover {
+  background: #ffd342;
+  transition: background .25s ease-in-out;
+   -moz-transition: background .25s ease-in-out;
+   -webkit-transition: background .25s ease-in-out;
+}
+
+.browse_link a:hover {
+  color: purple;
+}
+
+.friend_list {
+  background: white;
+  margin: 10px;
+  padding: 10px;
+  width: 250px;
+  border: 1px solid #c4cfd9;
+}
+
 /*Post*/
 .post_box {
   background: white;
@@ -103,8 +129,9 @@ h1 {
   width: 250px;
   height: 58px;
   border: 1px solid #c4cfd9;
+  display: inline-block;
 }
 
-.user_box td {
+.table_padding td {
   padding-right: 5px;
 }

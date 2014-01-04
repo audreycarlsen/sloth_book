@@ -1,20 +1,42 @@
 <div class='left_box'>
   <% if current_user.friend_count == 0 %>
-    Welcome to your newsfeed. You currently have no friends!
+    <p>You currently have no friends!</p>
   <% end %>
 
-  <p><%= link_to 'Make new slothy friends!', users_path %></p>
+  <div class='browse_link'>
+    <%= link_to 'FIND FRIENDS', users_path %>
+  </div>
 
   <% if current_user.pending_friendships_to_respond_to.count > 0 %>
     <p>You have <%= pluralize(current_user.pending_friendships_to_respond_to.count, 'new slothy friend request') %>!</p>
 
-    <% current_user.inverse_friendships.each do |inverse_friendship| %>
-      <% if inverse_friendship.status == 'pending' %>
-        <%= link_to "#{inverse_friendship.user.name}", user_path(inverse_friendship.user.id) %>
-        <%= button_to "Accept Friend Request", friendship_path(inverse_friendship.id), method: :patch %><br>
+    <div class='friend_list'>
+      <table >
+        <% current_user.pending_friendships_to_respond_to.each do |friendship| %>
+          <tr>
+            <td>
+              <table class='table_padding'>
+                <tr>
+                  <td><%= image_tag(friendship.user.photo_url, size: '50x50') %></td>
+                  <td>
+                    <%= link_to "#{friendship.user.name}", user_path(friendship.user.id) %>
+                    <%= form_for(@friendship) do |f| %>
+                      <%= f.hidden_field :status, :value => 'accepted' %> 
+                      <p><%= f.submit("Accept")%></p>
+                    <% end %>
+                    <%= form_for(@friendship) do |f| %>
+                      <%= f.hidden_field :status, :value => 'declined' %> 
+                      <p><%= f.submit("Decline")%></p>
+                    <% end %>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
-    <% end %>
-  <% end %>
+    </table>
+  </div>
 </div>
 
 <div class='right_box'>
