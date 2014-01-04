@@ -1,54 +1,58 @@
-<% if current_user.friend_count == 0 %>
-  Welcome to your newsfeed. You currently have no friends!
-<% end %>
+<div class='left_box'>
+  <% if current_user.friend_count == 0 %>
+    Welcome to your newsfeed. You currently have no friends!
+  <% end %>
 
-<p><%= link_to 'Make new slothy friends!', users_path %></p>
+  <p><%= link_to 'Make new slothy friends!', users_path %></p>
 
-<% if current_user.pending_friendships.count > 0 %>
-  <p>You have <%= pluralize(current_user.pending_friendships, 'new slothy friend request') %>!</p>
+  <% if current_user.pending_friendships.count > 0 %>
+    <p>You have <%= pluralize(current_user.pending_friendships.count, 'new slothy friend request') %>!</p>
 
-  <% current_user.inverse_friendships.each do |inverse_friendship| %>
-    <% if inverse_friendship.status == 'pending' %>
-      <%= link_to "#{inverse_friendship.user.name}", user_path(inverse_friendship.user.id) %>
-      <%= button_to "Confirm Friend Request", friendship_path(inverse_friendship.id), method: :patch %><br>
+    <% current_user.inverse_friendships.each do |inverse_friendship| %>
+      <% if inverse_friendship.status == 'pending' %>
+        <%= link_to "#{inverse_friendship.user.name}", user_path(inverse_friendship.user.id) %>
+        <%= button_to "Confirm Friend Request", friendship_path(inverse_friendship.id), method: :patch %><br>
+      <% end %>
     <% end %>
   <% end %>
-<% end %>
+</div>
 
-<%= form_for(@post) do |f| %>
-  <p>
-    <%= f.label :content, "What's on your mind?"%><br>
-    <%= f.text_area :content, :size => '55x5' %>
-  </p>
+<div class='right_box'>
+  <%= form_for(@post) do |f| %>
+    <p>
+      <%= f.label :content, "What's on your mind?"%><br>
+      <%= f.text_area :content, :size => '55x5' %>
+    </p>
 
-  <%= f.hidden_field :user_id, :value => current_user.id %> 
-  <%= f.hidden_field :author, :value => current_user.name %>
+    <%= f.hidden_field :user_id, :value => current_user.id %> 
+    <%= f.hidden_field :author_id, :value => current_user.id %>
 
-  <p><%= f.submit("Onward, to glory!")%></p>
-<% end %>
-
-<% Post.all.reverse.each do |post| %>
-  <% if ( current_user.find_all_friend_names.include?(post.author) || post.author == current_user.name ) && ( current_user.find_all_friend_names.include?(post.user.name) || post.user.name == current_user.name ) %>
-    <table>
-      <tr>
-        <td><%= image_tag(User.find(post.author)), size: '50x50') %></td>
-        <td>
-          <div class='post_box'>
-            <div class='post_title'>
-              <%= link_to "#{post.author}", user_path(post.author) %>
-              <% if post.author != post.user.name %> 
-                → <strong><%= link_to "#{post.user.name}", user_path(post.user.id) %></strong>
-              <% end %>
-            </div>
-            <div class='post_date'>
-              <%= time_ago_in_words(post.created_at).capitalize %> ago
-            </div>
-            <div class='post_content'>
-              <%= post.content %>
-            </div>
-          </div>
-        </td>
-      </tr>
-    </table>
+    <p><%= f.submit("Onward, to glory!")%></p>
   <% end %>
-<% end %>
+
+  <% Post.all.reverse.each do |post| %>
+    <% if ( current_user.find_all_friend_names.include?(post.author.name) || post.author == current_user ) && ( current_user.find_all_friend_names.include?(post.user.name) || post.user == current_user ) %>
+      <div class='post_box'>
+        <table>
+          <tr>
+            <td><%= image_tag(post.author.photo_url, size: '50x50') %></td>
+            <td>
+              <div class='post_title'>
+                <%= link_to "#{post.author.name}", user_path(post.author.id) %>
+                <% if post.author != post.user %> 
+                  → <strong><%= link_to "#{post.user.name}", user_path(post.user.id) %></strong>
+                <% end %>
+              </div>
+              <div class='post_date'>
+                <%= time_ago_in_words(post.created_at).capitalize %> ago
+              </div>
+              <div class='post_content'>
+                <%= post.content %>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    <% end %>
+  <% end %>
+</div>

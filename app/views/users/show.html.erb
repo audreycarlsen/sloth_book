@@ -1,4 +1,4 @@
-<div class='profile_info'>
+<div class='left_box'>
 
   <div class='profile_table'>
     <table>
@@ -29,7 +29,7 @@
 
 </div>
 
-<div class='profile_wall'>
+<div class='right_box'>
   <% if current_user.find_all_friend_names.include?(@user.name) || current_user == @user %>
     <%= form_for(@post) do |f| %>
       <p>
@@ -43,7 +43,7 @@
       </p>
 
       <%= f.hidden_field :user_id, :value => @user.id %> 
-      <%= f.hidden_field :author, :value => current_user.name %>
+      <%= f.hidden_field :author_id, :value => current_user.id %>
 
       <p><%= f.submit("Onward, to glory!")%></p>
     <% end %>
@@ -53,18 +53,22 @@
 
   <% @user.posts.reverse.each do |post| %>
     <div class='post_box'>
-      <div class='post_title'>
-
-        <!-- FIX THIS -->
-        
-        <%= link_to "#{post.author}", user_path(post.author) %>
-      </div>
-      <div class='post_date'>
-        <%= time_ago_in_words(post.created_at).capitalize %> ago
-      </div>
-      <div class='post_content'>
-        <%= post.content %>
-      </div>
+      <table>
+        <tr>
+          <td><%= image_tag(post.author.photo_url, size: '50x50') %></td>
+          <td>
+            <div class='post_title'>
+              <%= link_to "#{post.author.name}", user_path(post.author.id) %>
+            </div>
+            <div class='post_date'>
+              <%= time_ago_in_words(post.created_at).capitalize %> ago
+            </div>
+            <div class='post_content'>
+              <%= post.content %>
+            </div>
+          </td>
+        </tr>
+      </table>
     </div>
   <% end %>
 </div>

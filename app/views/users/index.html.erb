@@ -16,10 +16,6 @@
             <% else %>
               <%= button_to "Add Friend", friendships_path(:friend_id => user.id), method: :post %>
             <% end %>
-
-            <% if current_user.name == 'David Foster Wallace' %>
-              [<%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %>]
-            <% end %>
           </td>
         </tr>
       </table>
