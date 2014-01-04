@@ -30,37 +30,41 @@
 </div>
 
 <div class='profile_wall'>
-  <%= form_for(@post) do |f| %>
-    <% if @post.errors.any? %>
-      <%= pluralize(@post.errors.count, "error") %> prohibited this message from being posted:
-      <ul>
-        <% @post.errors.full_messages.each do |message| %>
-          <li> <%= message %> </li>
-        <% end %> 
-      </ul>
+  <% if current_user.find_all_friend_names.include?(@user.name) || current_user == @user %>
+    <%= form_for(@post) do |f| %>
+      <p>
+        <% if @user == current_user %>
+          <%= f.label :content, "What's on your mind?"%>
+        <% else %>
+          <%= f.label :content, "Say something..." %>
+        <% end %>
+        <br>
+        <%= f.text_area :content, :size => '55x5' %>
+      </p>
+
+      <%= f.hidden_field :user_id, :value => @user.id %> 
+      <%= f.hidden_field :author, :value => current_user.name %>
+
+      <p><%= f.submit("Onward, to glory!")%></p>
     <% end %>
-
-    <p>
-      <% if @user.id == current_user.id %>
-        <%= f.label :content, "What's on your mind?"%>
-      <% else %>
-        <%= f.label :content, "Say something..." %>
-      <% end %>
-      <br>
-      <%= f.text_area :content %>
-    </p>
-
-    <%= f.hidden_field :user_id, :value => @user.id %> 
-    <%= f.hidden_field :author, :value => current_user.name %>
-
-    <p><%= f.submit("Onward, to glory!")%></p>
+  <% else %>
+    Send <%= @user.name %> a <%= link_to "friend request", friendships_path(:friend_id => @user.id), method: :post %>.
   <% end %>
 
   <% @user.posts.reverse.each do |post| %>
-    <p>
-      <strong><%= post.author %></strong><br>
-      <em><%= time_ago_in_words(post.created_at).capitalize %> ago</em><br>
-      <%= post.content %>
-    </p>
+    <div class='post_box'>
+      <div class='post_title'>
+
+        <!-- FIX THIS -->
+        
+        <%= link_to "#{post.author}", user_path(post.author) %>
+      </div>
+      <div class='post_date'>
+        <%= time_ago_in_words(post.created_at).capitalize %> ago
+      </div>
+      <div class='post_content'>
+        <%= post.content %>
+      </div>
+    </div>
   <% end %>
 </div>

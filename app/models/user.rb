@@ -10,24 +10,22 @@ class User < ActiveRecord::Base
   has_many :inverse_friendships, :class_name => 'Friendship', :foreign_key => 'friend_id'
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
 
-  def pending_friends
+  def pending_friends_to_respond_to
     inverse_friendships.where(:status => 'pending')
   end
 
-  def not_already_friends?(user_id)
-    if friendships.where(friend_id: user_id) == []
-      return true
-    else
-      return false
-    end
-  end
+  def pending_friendships
+    pending_friendships = []
 
-  def not_already_inverse_friends?(user_id)
-    if inverse_friendships.where(user_id: user_id) == []
-      return true
-    else
-      return false
+    friendships.where(:status => 'pending').each do |friendship|
+      pending_friendships << friendship
     end
+
+    inverse_friendships.where(:status => 'pending').each do |inverse_friendship|
+      pending_friendships << inverse_friendship
+    end
+
+    pending_friendships
   end
 
   def friend_count
@@ -36,16 +34,15 @@ class User < ActiveRecord::Base
 
   def find_all_friend_names
     friend_names = []
-    friendships.each do |friendship|
-      if friendship.status == 'accepted'
-        friend_names << friendship.friend.name
-      end
+
+    friendships.where(:status => 'accepted').each do |friendship|
+      friend_names << friendship.friend.name
     end
-    inverse_friendships.each do |inverse_friendship|
-      if inverse_friendship.status == 'accepted'
-        friend_names << inverse_friendship.user.name
-      end
+
+    inverse_friendships.where(:status => 'accepted').each do |inverse_friendship|
+      friend_names << inverse_friendship.user.name
     end
+
     friend_names
   end
 end

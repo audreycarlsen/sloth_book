@@ -1,6 +1,5 @@
 class PostsController < ApplicationController
   def create
-    # @user = User.find(params[:id])
     @post = Post.new(post_params)
     @post.save
     redirect_to(:back)

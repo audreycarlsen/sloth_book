@@ -4,8 +4,8 @@
 
 <p><%= link_to 'Make new slothy friends!', users_path %></p>
 
-<% if current_user.pending_friends.count > 0 %>
-  <p>You have <%= pluralize(current_user.pending_friends.count, 'new slothy friend request') %>!</p>
+<% if current_user.pending_friendships.count > 0 %>
+  <p>You have <%= pluralize(current_user.pending_friendships, 'new slothy friend request') %>!</p>
 
   <% current_user.inverse_friendships.each do |inverse_friendship| %>
     <% if inverse_friendship.status == 'pending' %>
@@ -16,18 +16,9 @@
 <% end %>
 
 <%= form_for(@post) do |f| %>
-  <% if @post.errors.any? %>
-    <%= pluralize(@post.errors.count, "error") %> prohibited this message from being posted:
-    <ul>
-      <% @post.errors.full_messages.each do |message| %>
-        <li> <%= message %> </li>
-      <% end %> 
-    </ul>
-  <% end %>
-
   <p>
     <%= f.label :content, "What's on your mind?"%><br>
-    <%= f.text_area :content %>
+    <%= f.text_area :content, :size => '55x5' %>
   </p>
 
   <%= f.hidden_field :user_id, :value => current_user.id %> 
@@ -38,14 +29,26 @@
 
 <% Post.all.reverse.each do |post| %>
   <% if ( current_user.find_all_friend_names.include?(post.author) || post.author == current_user.name ) && ( current_user.find_all_friend_names.include?(post.user.name) || post.user.name == current_user.name ) %>
-    <p>
-      <strong><%= post.author %></strong>
-      <% if post.author != post.user.name %> 
-        > <strong><%= post.user.name %></strong>
-      <% end %>
-      <br>
-      <em><%= time_ago_in_words(post.created_at).capitalize %> ago</em><br>
-      <%= post.content %>
-    </p>
+    <table>
+      <tr>
+        <td><%= image_tag(User.find(post.author)), size: '50x50') %></td>
+        <td>
+          <div class='post_box'>
+            <div class='post_title'>
+              <%= link_to "#{post.author}", user_path(post.author) %>
+              <% if post.author != post.user.name %> 
+                → <strong><%= link_to "#{post.user.name}", user_path(post.user.id) %></strong>
+              <% end %>
+            </div>
+            <div class='post_date'>
+              <%= time_ago_in_words(post.created_at).capitalize %> ago
+            </div>
+            <div class='post_content'>
+              <%= post.content %>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
   <% end %>
 <% end %>
