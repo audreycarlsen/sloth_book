@@ -24,13 +24,6 @@
      <%= f.password_field :password_confirmation, :size => 34 %></p>
 
   <p>
-    <%= f.label 'Birthday' %><br>
-    <%= select_month Date.today.month, {name: 'user[birth_month]'} %>
-    <%= select_day Date.today.day, {name: 'user[birth_day]'} %>
-    <%= select_year Date.today, {start_year: Date.today.year, end_year: Date.today.year-100}, {name: 'user[birth_year]'} %>
-  </p>
-
-  <p>
     <%= f.radio_button :sex, "female" %>
     <%= f.label :sex, "Female"%>
     <%= f.radio_button :sex, "male" %>
