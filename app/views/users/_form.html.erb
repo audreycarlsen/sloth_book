@@ -25,8 +25,8 @@
 
   <p>
     <%= f.label 'Birthday' %><br>
-    <%= select_month nil, {name: 'user[birth_month]'} %>
-    <%= select_day nil, {name: 'user[birth_day]'} %>
+    <%= select_month Date.today, {name: 'user[birth_month]'} %>
+    <%= select_day Date.today, {name: 'user[birth_day]'} %>
     <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year-100}, {name: 'user[birth_year]'} %>
   </p>
 

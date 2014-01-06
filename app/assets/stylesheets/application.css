@@ -63,6 +63,7 @@ h1 {
 
 .right_box {
   float:left;
+  margin-top: -25px;
 }
 
 .style_image {
