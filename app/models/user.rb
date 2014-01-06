@@ -10,7 +10,9 @@ class User < ActiveRecord::Base
   has_many :inverse_friendships, :class_name => 'Friendship', :foreign_key => 'friend_id'
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
 
-
+  def self.search(query)
+    User.where(["name LIKE ?", "%#{query}%"])
+  end
 
   def pending_friendships_to_respond_to
     inverse_friendships.where(:status => 'pending')

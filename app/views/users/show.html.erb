@@ -67,7 +67,7 @@
 <div class='right_box'>
   <% if current_user.find_all_friend_names.include?(@user.name) || current_user == @user %>
     <%= form_for(@post) do |f| %>
-      <p><br>
+      <p>
         <% if @user == current_user %>
           <%= f.label :content, "What's on your mind?"%>
         <% else %>

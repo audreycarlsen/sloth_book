@@ -9,6 +9,10 @@ SlothBook::Application.routes.draw do
   resources :friendships
   resources :posts
   resources :sessions
-  resources :users
+  resources :users do
+    collection do
+      get 'search'
+    end
+  end
 
 end

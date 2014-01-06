@@ -44,6 +44,16 @@ class UsersController < ApplicationController
     @post = Post.new
   end
 
+  def search
+    thing_were_searching_for = params[:search]
+    @users = User.search(thing_were_searching_for)
+    if @users.empty?  
+      redirect_to users_path, notice: "Sorry, Sloth Cadet, no items matching #{thing_were_searching_for}."      
+    else
+      render :index
+    end
+  end
+
   private
 
   def set_user
