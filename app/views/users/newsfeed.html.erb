@@ -26,8 +26,12 @@
                   </td>
                   <td>
                     <%= link_to "#{friendship.user.name}", user_path(friendship.user.id) %>
-                    <%= button_to "Accept", friendship_path(friendship.id), method: :patch %>
-                    <%= button_to 'Decline', friendship_path(friendship.id), method: :delete %>
+                    <table>
+                      <tr>
+                        <td><%= button_to "Accept", friendship_path(friendship.id), method: :patch %></td>
+                        <td><%= button_to 'Decline', friendship_path(friendship.id), method: :delete %></td>
+                      </tr>
+                    </table>
                   </td>
                 </tr>
               </table>
