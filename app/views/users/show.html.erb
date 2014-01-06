@@ -3,7 +3,13 @@
   <div class='profile_table'>
     <table>
       <tr>
-        <td><%= image_tag(@user.photo_url, :class => 'style_image') %> </td>
+        <td>
+          <% if @user.photo_url == '' %>
+            <%= image_tag('default.jpg', :class => 'style_image') %> 
+          <% else %>
+            <%= image_tag(@user.photo_url, :class => 'style_image') %> 
+          <% end %>
+        </td>
         <td>
           <h1><%= "#{@user.name}" %></h1>
           <p><%= "#{@user.email}" %></p>
@@ -23,7 +29,13 @@
         <% @user.friendships.each do |friendship| %>
           <% if friendship.status == 'accepted' %>
             <tr>
-              <td><%= image_tag(friendship.friend.photo_url, size: '50x50') %></td>
+              <td>
+                <% if friendship.friend.photo_url == '' %>
+                  <%= image_tag('default.jpg', size: '50x50') %> 
+                <% else %>
+                  <%= image_tag(friendship.friend.photo_url, size: '50x50') %> 
+                <% end %>
+              </td>
               <td>
                 <%= link_to "#{friendship.friend.name}", user_path(friendship.friend.id) %> (<%= link_to 'remove', friendship_path(friendship.id), method: :delete %>)
               </td>
@@ -34,7 +46,13 @@
         <% @user.inverse_friendships.each do |inverse_friendship| %>
           <% if inverse_friendship.status == 'accepted' %>
             <tr>
-              <td><%= image_tag(inverse_friendship.user.photo_url, size: '50x50') %></td>
+              <td>                
+                <% if inverse_friendship.user.photo_url == '' %>
+                  <%= image_tag('default.jpg', size: '50x50') %> 
+                <% else %>
+                  <%= image_tag(inverse_friendship.user.photo_url, size: '50x50') %> 
+                <% end %>
+              </td>
               <td>
                 <%= link_to "#{inverse_friendship.user.name}", user_path(inverse_friendship.user.id) %>  (<%= link_to 'remove', friendship_path(inverse_friendship.id), method: :delete %>)
               </td>
@@ -49,7 +67,7 @@
 <div class='right_box'>
   <% if current_user.find_all_friend_names.include?(@user.name) || current_user == @user %>
     <%= form_for(@post) do |f| %>
-      <p>
+      <p><br>
         <% if @user == current_user %>
           <%= f.label :content, "What's on your mind?"%>
         <% else %>
@@ -67,14 +85,20 @@
   <% elsif current_user.pending_friendship_names.include?(@user.name) %>
     Friend request sent.
   <% else %>
-    Send <%= @user.name %> a <%= link_to "friend request", friendships_path(:friend_id => @user.id), method: :post %>.<br><br>
+    <br><br>Send <%= @user.name %> a <%= link_to "friend request", friendships_path(:friend_id => @user.id), method: :post %>.<br><br>
   <% end %>
 
   <% @user.posts.reverse.each do |post| %>
     <div class='post_box'>
       <table>
         <tr>
-          <td><%= image_tag(post.author.photo_url, size: '50x50') %></td>
+          <td>
+            <% if post.author.photo_url == '' %>
+              <%= image_tag('default.jpg', size: '50x50') %> 
+            <% else %>
+              <%= image_tag(post.author.photo_url, size: '50x50') %> 
+            <% end %>
+          </td>
           <td>
             <div class='post_title'>
               <%= link_to "#{post.author.name}", user_path(post.author.id) %>

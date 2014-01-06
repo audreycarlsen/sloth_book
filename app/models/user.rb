@@ -10,13 +10,7 @@ class User < ActiveRecord::Base
   has_many :inverse_friendships, :class_name => 'Friendship', :foreign_key => 'friend_id'
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
 
-  before_save :set_default_pic
 
-  def set_default_pic
-    if photo_url.blank?
-      photo_url = 'default.jpg'
-    end
-  end
 
   def pending_friendships_to_respond_to
     inverse_friendships.where(:status => 'pending')

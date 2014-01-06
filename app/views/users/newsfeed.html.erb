@@ -17,7 +17,13 @@
             <td>
               <table class='table_padding'>
                 <tr>
-                  <td><%= image_tag(friendship.user.photo_url, size: '50x50') %></td>
+                  <td>
+                    <% if friendship.user.photo_url == '' %>
+                      <%= image_tag('default.jpg', size: '50x50') %> 
+                    <% else %>
+                      <%= image_tag(friendship.user.photo_url, size: '50x50') %> 
+                    <% end %>
+                  </td>
                   <td>
                     <%= link_to "#{friendship.user.name}", user_path(friendship.user.id) %>
                     <%= button_to "Accept", friendship_path(friendship.id), method: :patch %>
@@ -51,7 +57,13 @@
       <div class='post_box'>
         <table>
           <tr>
-            <td><%= image_tag(post.author.photo_url, size: '50x50') %></td>
+            <td>
+              <% if post.author.photo_url == '' %>
+                <%= image_tag('default.jpg', size: '50x50') %> 
+              <% else %>
+                <%= image_tag(post.author.photo_url, size: '50x50') %> 
+              <% end %>
+            </td>
             <td>
               <div class='post_title'>
                 <%= link_to "#{post.author.name}", user_path(post.author.id) %>

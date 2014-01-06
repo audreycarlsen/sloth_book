@@ -7,7 +7,13 @@
     <div class='user_box table_padding'>
       <table>
         <tr>
-          <td><%= image_tag(user.photo_url, size: '50x50') %></td>
+          <td>
+            <% if user.photo_url == '' %>
+              <%= image_tag('default.jpg', size: '50x50') %> 
+            <% else %>
+              <%= image_tag(user.photo_url, size: '50x50') %> 
+            <% end %>
+          </td>
 
           <td><%= link_to "#{user.name}", user %><br>
 
