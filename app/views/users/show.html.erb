@@ -87,7 +87,7 @@
       <p><%= f.submit("Onward, to glory!")%></p>
     <% end %>
   <% elsif current_user.pending_friendship_names.include?(@user.name) %>
-    Friend request sent.
+    Friendship pending.
   <% else %>
     <br><br>Send <%= @user.name %> a <%= link_to "friend request", friendships_path(:friend_id => @user.id), method: :post %>.<br><br>
   <% end %>
