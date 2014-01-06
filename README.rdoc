@@ -1,1 +1,5 @@
-SlothBook is live at sloth-book.herokuapp.com
+SlothBook is live at sloth-book.herokuapp.com.
+
+Admin can edit and/or destroy users
+Email: ada@ada.com
+Password: 12345
