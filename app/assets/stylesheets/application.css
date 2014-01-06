@@ -24,6 +24,11 @@ h1 {
   margin: 0;
 }
 
+.log_in_table td {
+  vertical-align: top;
+  padding-right: 75px;
+}
+
 .id_bar {
   width: auto;
   height: 22px;

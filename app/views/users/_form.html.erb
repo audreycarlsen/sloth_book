@@ -8,19 +8,28 @@
     </ul>
   <% end %>
   
-  <!-- Add labels -->
-  
-  <p><%= f.text_field :name, placeholder: "Name", :size => 34 %></p>
+  <p><%= label_tag :name %><br />
+     <%= f.text_field :name, :size => 34 %></p>
 
-  <p><%= f.text_field :email, placeholder: "Your Email", :size => 34 %></p>
+  <p><%= label_tag :email %><br />
+     <%= f.text_field :email, :size => 34 %></p>
 
-  <p><%= f.text_field :photo_url, placeholder: "Profile Picture URL", :size => 34 %></p>
+  <p><%= label_tag :photo_url, 'Profile Picture URL' %><br />
+     <%= f.text_field :photo_url, :size => 34 %></p>
 
-  <p><%= f.password_field :password, placeholder: "Password", :size => 34 %></p>
+  <p><%= label_tag :password %><br />
+     <%= f.password_field :password, :size => 34 %></p>
 
-  <p><%= f.password_field :password_confirmation, placeholder: "Re-enter Password", :size => 34 %></p>
+  <p><%= label_tag :password_confirmation, 'Re-Enter Password'%><br />
+     <%= f.password_field :password_confirmation, :size => 34 %></p>
 
-<!-- Make radio buttons work  -->
+  <p>
+    <%= f.label 'Birthday' %><br>
+    <%= select_month nil, {name: 'user[birth_month]'} %>
+    <%= select_day nil, {name: 'user[birth_day]'} %>
+    <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year-100}, {name: 'user[birth_year]'} %>
+  </p>
+
   <p>
     <%= f.radio_button :sex, "female" %>
     <%= f.label :sex, "Female"%>

@@ -20,14 +20,9 @@
                   <td><%= image_tag(friendship.user.photo_url, size: '50x50') %></td>
                   <td>
                     <%= link_to "#{friendship.user.name}", user_path(friendship.user.id) %>
-                    <%= form_for(@friendship) do |f| %>
-                      <%= f.hidden_field :status, :value => 'accepted' %> 
-                      <p><%= f.submit("Accept")%></p>
-                    <% end %>
-                    <%= form_for(@friendship) do |f| %>
-                      <%= f.hidden_field :status, :value => 'declined' %> 
-                      <p><%= f.submit("Decline")%></p>
-                    <% end %>
+                    <%= button_to "Accept", friendship_path(friendship.id), method: :patch %>
+                    <%= button_to 'Decline', friendship_path(friendship.id), method: :delete %>
+                    <%= params[:id].inspect %>
                   </td>
                 </tr>
               </table>

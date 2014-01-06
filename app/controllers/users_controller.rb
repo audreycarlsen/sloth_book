@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    if @user.save
+    if @user.save!
       session[:user_id] = @user.id
       redirect_to newsfeed_path
     else
@@ -42,18 +42,7 @@ class UsersController < ApplicationController
 
   def newsfeed
     @post = Post.new
-    @friendship = current_user.inverse_friendships.find(params[:id])
   end
-
-  # def search
-  #   user_name = params[:search]
-  #   user = User.where(:name => user_name)
-  #   if user_id  
-  #     redirect_to user_path(user.id)   
-  #   else
-  #     flash[:notice] = "Sorry, no such sloth exists."
-  #   end
-  # end
 
   private
 
@@ -62,6 +51,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :email, :photo_url, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :photo_url, :password, :password_confirmation, :sex, :birth_month, :birth_day, :birth_year)
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140104163546) do
+ActiveRecord::Schema.define(version: 20140105221153) do
 
   create_table "friendships", force: true do |t|
     t.integer  "user_id"
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20140104163546) do
     t.string   "birth_day"
     t.string   "birth_year"
     t.string   "sex"
-    t.string   "photo_url",       default: "default.jpg"
+    t.string   "photo_url"
     t.string   "name"
   end
 

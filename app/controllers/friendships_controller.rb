@@ -8,19 +8,15 @@ class FriendshipsController < ApplicationController
 
   def update
     @friendship = current_user.inverse_friendships.find(params[:id])
-    @friendship.update(friendship_params)
+    @friendship.status = 'accepted'
+    @friendship.save
     redirect_to newsfeed_path
   end
 
-  def edit
-    @friendship = current_user.inverse_friendships.find(params[:id])
-  end
-
   def destroy
-    @friendship = current_user.friendships.find(params[:id])
+    @friendship = current_user.inverse_friendships.find_by(id: params[:id])
     @friendship.destroy
-    flash[:notice] = 'Friend removed.'
-    redirect_to user_path(params[:id])
+    redirect_to :back
   end
 
   private

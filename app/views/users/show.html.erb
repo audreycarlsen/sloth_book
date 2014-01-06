@@ -7,39 +7,43 @@
         <td>
           <h1><%= "#{@user.name}" %></h1>
           <p><%= "#{@user.email}" %></p>
-          <p><%= "#{@user.sex}" %></p>
+          <p><%= "#{@user.sex.capitalize}" %></p>
+          <p>Birthday:<br>
+             <%= "#{@user.birth_month} #{@user.birth_day}, #{@user.birth_year}" %></p>
         </td>
       </tr>
     </table>
   </div>
 
-  <h2>Friends (<%= @user.friend_count %>)</h2>
+  <% if @user.friend_count > 0 %>
+    <h2>Friends (<%= @user.friend_count %>)</h2>
 
-  <div class='table_padding friend_list'>
-    <table>
-      <% @user.friendships.each do |friendship| %>
-        <% if friendship.status == 'accepted' %>
-          <tr>
-            <td><%= image_tag(friendship.friend.photo_url, size: '50x50') %></td>
-            <td>
-              <%= link_to "#{friendship.friend.name}", user_path(friendship.friend.id) %> (<%= link_to 'remove', friendship_path(friendship.id), method: :delete %>)
-            </td>
-          </tr>
+    <div class='table_padding friend_list'>
+      <table>
+        <% @user.friendships.each do |friendship| %>
+          <% if friendship.status == 'accepted' %>
+            <tr>
+              <td><%= image_tag(friendship.friend.photo_url, size: '50x50') %></td>
+              <td>
+                <%= link_to "#{friendship.friend.name}", user_path(friendship.friend.id) %> (<%= link_to 'remove', friendship_path(friendship.id), method: :delete %>)
+              </td>
+            </tr>
+          <% end %>
         <% end %>
-      <% end %>
 
-      <% @user.inverse_friendships.each do |inverse_friendship| %>
-        <% if inverse_friendship.status == 'accepted' %>
-          <tr>
-            <td><%= image_tag(inverse_friendship.user.photo_url, size: '50x50') %></td>
-            <td>
-              <%= link_to "#{inverse_friendship.user.name}", user_path(inverse_friendship.user.id) %> 
-            </td>
-          </tr>
+        <% @user.inverse_friendships.each do |inverse_friendship| %>
+          <% if inverse_friendship.status == 'accepted' %>
+            <tr>
+              <td><%= image_tag(inverse_friendship.user.photo_url, size: '50x50') %></td>
+              <td>
+                <%= link_to "#{inverse_friendship.user.name}", user_path(inverse_friendship.user.id) %> 
+              </td>
+            </tr>
+          <% end %>
         <% end %>
-      <% end %>
-    </table>
-  </div>
+      </table>
+    </div>
+  <% end %>
 </div>
 
 <div class='right_box'>
