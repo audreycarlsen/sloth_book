@@ -35,7 +35,10 @@
                 <% end %>
               </td>
               <td>
-                <%= link_to "#{friendship.friend.name}", user_path(friendship.friend.id) %> <%= button_to 'Remove', friendship_path(friendship.id), method: :delete %>
+                <%= link_to "#{friendship.friend.name}", user_path(friendship.friend.id) %> 
+                <% if @user == current_user %>
+                  <%= button_to 'Remove', friendship_path(friendship.id), method: :delete %>
+                <% end %>
               </td>
             </tr>
           <% end %>
@@ -52,7 +55,10 @@
                 <% end %>
               </td>
               <td>
-                <%= link_to "#{inverse_friendship.user.name}", user_path(inverse_friendship.user.id) %>  <%= button_to 'remove', friendship_path(inverse_friendship.id), method: :delete %>
+                <%= link_to "#{inverse_friendship.user.name}", user_path(inverse_friendship.user.id) %>
+                <% if @user == current_user %>
+                  <%= button_to 'remove', friendship_path(inverse_friendship.id), method: :delete %>
+                <% end %>
               </td>
             </tr>
           <% end %>
