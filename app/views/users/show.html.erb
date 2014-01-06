@@ -36,7 +36,7 @@
             <tr>
               <td><%= image_tag(inverse_friendship.user.photo_url, size: '50x50') %></td>
               <td>
-                <%= link_to "#{inverse_friendship.user.name}", user_path(inverse_friendship.user.id) %> 
+                <%= link_to "#{inverse_friendship.user.name}", user_path(inverse_friendship.user.id) %>  (<%= link_to 'remove', friendship_path(inverse_friendship.id), method: :delete %>)
               </td>
             </tr>
           <% end %>

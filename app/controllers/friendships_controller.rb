@@ -14,7 +14,11 @@ class FriendshipsController < ApplicationController
   end
 
   def destroy
-    @friendship = current_user.inverse_friendships.find_by(id: params[:id])
+    if current_user.friendships.find_by(id: params[:id])
+      @friendship = current_user.friendships.find_by(id: params[:id])
+    elsif current_user.inverse_friendships.find_by(id: params[:id])
+      @friendship = current_user.inverse_friendships.find_by(id: params[:id])
+    end
     @friendship.destroy
     redirect_to :back
   end

@@ -22,7 +22,6 @@
                     <%= link_to "#{friendship.user.name}", user_path(friendship.user.id) %>
                     <%= button_to "Accept", friendship_path(friendship.id), method: :patch %>
                     <%= button_to 'Decline', friendship_path(friendship.id), method: :delete %>
-                    <%= params[:id].inspect %>
                   </td>
                 </tr>
               </table>
