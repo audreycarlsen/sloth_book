@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in?
 
   def index
     @users = User.all
@@ -55,6 +56,12 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def logged_in?
+    unless session[:user_id]
+      redirect_to new_session_path
+    end
+  end
 
   def set_user
     @user = User.find(params[:id])
