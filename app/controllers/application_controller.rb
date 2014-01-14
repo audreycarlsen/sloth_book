@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_visitor
 
   def update_visit_count
-    unless request.referer && request.referer.include?("sloth-book")
+    unless ( request.referer && request.referer.include?("slothbook") )
       @current_visitor.update(visit_count: @current_visitor.visit_count + 1)
     end
   end
