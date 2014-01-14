@@ -13,7 +13,7 @@
         <td>
           <h1><%= "#{@user.name}" %></h1>
           <p><%= "#{@user.email}" %></p>
-          <p><%= "#{@user.sex.capitalize}" %></p>
+          <p><%= "#{@user.sex.capitalize}" if @user.sex %></p>
           <% if current_user.name == 'Ada Lovelace' %>
             <p>[ <%= link_to 'Edit', edit_user_path(@user) %> | <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %> ]</p>
           <% end %>
