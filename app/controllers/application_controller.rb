@@ -29,6 +29,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_visitor
 
   def update_visit_count
+    # Checking whether the referral is coming from elsewhere in the same site, which in this case has a URL including 'slothbook'
     unless ( request.referer && request.referer.include?("slothbook") )
       @current_visitor.update(visit_count: @current_visitor.visit_count + 1)
     end
