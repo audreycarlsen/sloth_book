@@ -3,7 +3,7 @@ Dashboard Index
 <table>
   <tr>
     <td>
-      Total visits: <%= @current_visitor.visit_count %>
+      Total visits: <%= Visitor.total_visits %>
     </td>
     <td>
     </td>
@@ -19,7 +19,7 @@ Dashboard Index
 
   <tr>
     <td>
-      Page views: <%= @current_visitor.pageview_count %>
+      Page views: <%= Visitor.total_pageviews %>
     </td>
     <td>
     </td>
