@@ -3,8 +3,4 @@ class DashboardController < ApplicationController
     @referer = request.referer
     @remote_ip = request.remote_ip
   end
-
-  def visit_count
-    
-  end
 end
