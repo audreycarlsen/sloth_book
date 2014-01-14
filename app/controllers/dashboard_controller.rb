@@ -1,6 +1,5 @@
 class DashboardController < ApplicationController
   def index
-    @referer = request.referer
-    @remote_ip = request.remote_ip
+    @total_visits = Visitor.all.count
   end
 end
