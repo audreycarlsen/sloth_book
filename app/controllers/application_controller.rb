@@ -15,13 +15,15 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def current_visitor
+    # Check if visitor is already current
     if session[:visitor_id]
       @current_visitor = Visitor.find(session[:visitor_id])
+    # If not, check if visitor is a returning visitor, then find visitor using cookie id
     elsif cookies.permanent[:visitor_id] && Visitor.find_by(cookie_id: cookies.permanent[:visitor_id])
       @current_visitor = Visitor.find_by(cookie_id: cookies.permanent[:visitor_id])
       session[:visitor_id] = @current_visitor.id
     else
-      # Assign random number as cookie id
+      # If visitor is new, assign visitor a random number as cookie id
       cookies.permanent[:visitor_id] = rand(1000000000000000000).to_s
       @current_visitor = Visitor.create(cookie_id: cookies.permanent[:visitor_id])
       session[:visitor_id] = @current_visitor.id
@@ -31,7 +33,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_visitor
 
   def update_visit_count
-    # Checking whether the referral is coming from elsewhere in the same site, which in this case has a URL including 'slothbook'
+    # Check whether the referral is coming from elsewhere in the same site, which in this case has a URL including 'slothbook'
     unless ( request.referer && request.referer.include?("slothbook") )
       @current_visitor.update(visit_count: @current_visitor.visit_count + 1)
     end
