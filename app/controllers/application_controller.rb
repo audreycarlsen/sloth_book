@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
       @current_visitor = Visitor.find(session[:visitor_id])
     # If not, check if visitor is a returning visitor, then find visitor using cookie id
     elsif cookies.permanent[:visitor_id] && Visitor.find_by(cookie_id: cookies.permanent[:visitor_id])
-      @current_visitor = Visitor.find_by(cookie_id: cookies.permanent[:visitor_id])
+      @current_visitor = Visitor.find_by(cookie_id: cookies.permanent[:visitor_id], browser: request.user_agent)
       session[:visitor_id] = @current_visitor.id
     else
       # If visitor is new, assign visitor a random number as cookie id
@@ -41,6 +41,18 @@ class ApplicationController < ActionController::Base
 
   def update_pageview_count
     @current_visitor.update(pageview_count: @current_visitor.pageview_count + 1)
+  end
+
+  def find_browser
+    if request.user_agent.include?("Firefox")
+      browser = "Firefox"
+    elsif request.user_agent.include?("Chrome")
+      browser = "Chrome"
+    elsif request.user_agent.include?("Safari")
+      browser = "Safari"
+    elsif request.user_agent.include?("IE")
+      browser = "Internet Explorer"
+    end
   end
   
 end

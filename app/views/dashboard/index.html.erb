@@ -3,24 +3,63 @@
 <table>
   <tr>
     <td>
-      Total visits: <%= Visitor.total_visits %>
+      Total visits:
     </td>
     <td>
-    </td>
-  </tr>
-
-  <tr>
-    <td>
-      Unique visitors: <%= @total_visits %>
-    </td>
-    <td>
+      <%= Visitor.total_visits %>
     </td>
   </tr>
 
   <tr>
     <td>
-      Total page views: <%= Visitor.total_pageviews %>
+      Unique visitors:
     </td>
     <td>
+      <%= @total_visits %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      Firefox:
+    </td>
+    <td>
+      <%= @total_visits %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      Chrome:
+    </td>
+    <td>
+      <%= @total_visits %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      Safari:
+    </td>
+    <td>
+      <%= @total_visits %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      Internet Explorer:
+    </td>
+    <td>
+      <%= @total_visits %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      Total page views:
+    </td>
+    <td>
+      <%= Visitor.total_pageviews %>
     </td>
   </tr>
