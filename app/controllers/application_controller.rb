@@ -17,11 +17,12 @@ class ApplicationController < ActionController::Base
   def current_visitor
     if session[:visitor_id]
       @current_visitor = Visitor.find(session[:visitor_id])
-    elsif Visitor.find_by(remote_ip: request.remote_ip)
-      @current_visitor = Visitor.find_by(remote_ip: request.remote_ip)
+    elsif cookies.permanent[:visitor_id] && Visitor.find_by(cookie_id: cookies.permanent[:visitor_id])
+      @current_visitor = Visitor.find_by(cookie_id: cookies.permanent[:visitor_id])
       session[:visitor_id] = @current_visitor.id
     else
-      @current_visitor = Visitor.create(remote_ip: request.remote_ip)
+      cookies.permanent[:visitor_id] = rand(1000000000000000000)
+      @current_visitor = Visitor.create(cookie_id: cookies.permanent[:visitor_id])
       session[:visitor_id] = @current_visitor.id
     end
     @current_visitor
