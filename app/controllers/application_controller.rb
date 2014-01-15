@@ -21,7 +21,8 @@ class ApplicationController < ActionController::Base
       @current_visitor = Visitor.find_by(cookie_id: cookies.permanent[:visitor_id])
       session[:visitor_id] = @current_visitor.id
     else
-      cookies.permanent[:visitor_id] = rand(1000000000000000000)
+      # Assign random number as cookie id
+      cookies.permanent[:visitor_id] = rand(1000000000000000000).to_s
       @current_visitor = Visitor.create(cookie_id: cookies.permanent[:visitor_id])
       session[:visitor_id] = @current_visitor.id
     end
