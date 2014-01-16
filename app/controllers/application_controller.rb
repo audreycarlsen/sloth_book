@@ -7,8 +7,6 @@ class ApplicationController < ActionController::Base
   before_action :update_pageview_count
   before_action :update_visit_count
 
-  private
-
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
@@ -20,12 +18,12 @@ class ApplicationController < ActionController::Base
       @current_visitor = Visitor.find(session[:visitor_id])
     # If not, check if visitor is a returning visitor, then find visitor using cookie id
     elsif cookies.permanent[:visitor_id] && Visitor.find_by(cookie_id: cookies.permanent[:visitor_id])
-      @current_visitor = Visitor.find_by(cookie_id: cookies.permanent[:visitor_id], browser: request.user_agent)
+      @current_visitor = Visitor.find_by(cookie_id: cookies.permanent[:visitor_id])
       session[:visitor_id] = @current_visitor.id
     else
       # If visitor is new, assign visitor a random number as cookie id
       cookies.permanent[:visitor_id] = rand(1000000000000000000).to_s
-      @current_visitor = Visitor.create(cookie_id: cookies.permanent[:visitor_id])
+      @current_visitor = Visitor.create(cookie_id: cookies.permanent[:visitor_id], browser: self.find_browser)
       session[:visitor_id] = @current_visitor.id
     end
     @current_visitor
@@ -45,13 +43,13 @@ class ApplicationController < ActionController::Base
 
   def find_browser
     if request.user_agent.include?("Firefox")
-      browser = "Firefox"
+      return "Firefox"
     elsif request.user_agent.include?("Chrome")
-      browser = "Chrome"
+      return "Chrome"
     elsif request.user_agent.include?("Safari")
-      browser = "Safari"
+      return "Safari"
     elsif request.user_agent.include?("IE")
-      browser = "Internet Explorer"
+      return "Internet Explorer"
     end
   end
   
