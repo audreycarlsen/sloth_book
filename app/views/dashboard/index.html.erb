@@ -1,6 +1,9 @@
 <h1>Analytics Dashboard</h1>
 
-<canvas id="canvas" width=500 height=400></canvas>
+New vs. Returning Visitors:<br>
+<canvas class="canvas" id="canvas" width=250 height=250></canvas>
+
+<!-- <canvas class="canvas" id="canvas" width=500 height=250></canvas> -->
 
 <table>
   <tr>
@@ -25,7 +28,7 @@
     <td>
       New visitors:
     </td>
-    <td>
+    <td id="new_vis">
       <%= @new_visitors %>
     </td>
   </tr>
@@ -34,7 +37,7 @@
     <td>
       Returning visitors:
     </td>
-    <td>
+    <td id="ret_vis">
       <%= @returning_visitors %>
     </td>
   </tr>
@@ -43,7 +46,7 @@
     <td>
       Firefox:
     </td>
-    <td>
+    <td id="firefox">
       <%= @firefox_users %>
     </td>
   </tr>
@@ -52,7 +55,7 @@
     <td>
       Chrome:
     </td>
-    <td>
+    <td id="chrome">
       <%= @chrome_users %>
     </td>
   </tr>
@@ -61,7 +64,7 @@
     <td>
       Safari:
     </td>
-    <td>
+    <td id="safari">
       <%= @safari_users %>
     </td>
   </tr>
@@ -70,7 +73,7 @@
     <td>
       Internet Explorer:
     </td>
-    <td>
+    <td id="ie"> 
       <%= @ie_users %>
     </td>
   </tr>

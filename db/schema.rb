@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140115183119) do
+ActiveRecord::Schema.define(version: 20140116204704) do
 
   create_table "friendships", force: true do |t|
     t.integer  "user_id"
@@ -44,8 +44,8 @@ ActiveRecord::Schema.define(version: 20140115183119) do
 
   create_table "visitors", force: true do |t|
     t.string   "remote_ip"
-    t.integer  "visit_count",    default: 0
-    t.integer  "pageview_count", default: 0
+    t.integer  "visit_count",    default: 1
+    t.integer  "pageview_count", default: 1
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "cookie_id"

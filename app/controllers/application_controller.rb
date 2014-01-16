@@ -56,6 +56,8 @@ class ApplicationController < ActionController::Base
       "Safari"
     elsif request.user_agent.include?("IE")
       "Internet Explorer"
+    else
+      "Other"
     end
   end
   
