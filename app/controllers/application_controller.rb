@@ -43,13 +43,13 @@ class ApplicationController < ActionController::Base
 
   def find_browser
     if request.user_agent.include?("Firefox")
-      return "Firefox"
+      "Firefox"
     elsif request.user_agent.include?("Chrome")
-      return "Chrome"
+      "Chrome"
     elsif request.user_agent.include?("Safari")
-      return "Safari"
+      "Safari"
     elsif request.user_agent.include?("IE")
-      return "Internet Explorer"
+      "Internet Explorer"
     end
   end
   
