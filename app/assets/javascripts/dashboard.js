@@ -94,9 +94,9 @@
     var context2 = canvas2.getContext( '2d' );
 
     context2.beginPath();
-    context2.moveTo( 0, 232 );
+    context2.moveTo( 0, 231 );
     context2.lineWidth = 2;
-    context2.lineTo(275, 232);
+    context2.lineTo(275, 231);
     context2.stroke();
     context2.closePath();
 
@@ -107,7 +107,7 @@
       var rectWidth = 35;
       var rectHeight = height;
       var x = xCoord;
-      var y = canvas2.height - rectHeight;
+      var y = canvas2.height - rectHeight - 20;
       
       context2.rect( x, y , rectWidth, rectHeight );
       context2.fillStyle = color;
@@ -127,11 +127,11 @@
     var other = parseInt( otherEl.innerHTML, 10);
     var browserTotal = firefox + chrome + safari + ie + other;
 
-    var firefoxPer = firefox / browserTotal * 227 + 3;
-    var chromePer = chrome / browserTotal * 227 + 3;
-    var safariPer = safari / browserTotal * 227 + 3;
-    var iePer = ie / browserTotal * 227 + 3;
-    var otherPer = other / browserTotal * 227 + 3;
+    var firefoxPer = firefox / browserTotal * 220 + 3;
+    var chromePer = chrome / browserTotal * 220 + 3;
+    var safariPer = safari / browserTotal * 220 + 3;
+    var iePer = ie / browserTotal * 220 + 3;
+    var otherPer = other / browserTotal * 220 + 3;
 
     // Browser Bars
 
@@ -158,8 +158,12 @@
     context2.fillText( "Other" , 325, 185 );
 
     // Text
+    context2.fillText( firefox , 23, 250 );
+    context2.fillText( chrome , 79, 250 );
+    context2.fillText( safari , 134, 250);
+    context2.fillText( ie , 190, 250 );
+    context2.fillText( other , 245, 250 );
 
-    
 
   });
 
