@@ -1,47 +1,62 @@
 <h1>Analytics Dashboard</h1>
 
-New vs. Returning Visitors:<br>
-<canvas class="canvas" id="canvas" width=250 height=250></canvas>
-
-<!-- <canvas class="canvas" id="canvas" width=500 height=250></canvas> -->
-
 <table>
   <tr>
-    <td>
-      Total visits:
-    </td>
-    <td>
-      <%= Visitor.total_visits %>
-    </td>
+    <td><h2>New vs. Returning Visitors</h2></td>
+    <td><h2>New vs. Returning Visitors</h2></td>
+  </tr>
+  <tr>
+    <td><canvas class="canvas" id="canvas" width=400 height=232></canvas></td>
+    <td><canvas class="canvas" id="canvas2" width=500 height=232></canvas></td>
+  </tr>
+</table>
+
+<table class="analytics_table">
+  <tr>
+    <th>Site Visits</th>
+    <th>Page Views</th>
+    <th>Unique Visitors</th>
   </tr>
 
   <tr>
+    <td><%= Visitor.total_visits %></td>
     <td>
-      Unique visitors:
+      <%= Visitor.total_pageviews %>
     </td>
-    <td>
-      <%= @unique_visitors %>
-    </td>
+    <td><%= @unique_visitors %></td>
   </tr>
 
   <tr>
-    <td>
-      New visitors:
-    </td>
-    <td id="new_vis">
-      <%= @new_visitors %>
-    </td>
+    <td></td>
+    <td></td>
+    <td>(<span id="new_vis"><%= @new_visitors %></span> new)</td>
   </tr>
 
   <tr>
-    <td>
-      Returning visitors:
-    </td>
-    <td id="ret_vis">
-      <%= @returning_visitors %>
-    </td>
+    <td></td>
+    <td></td>
+    <td>(<span id="ret_vis"><%= @returning_visitors %></span> returning)</td>
+  </tr>
+</table>
+
+<table class="analytics_table">
+  <tr>
+    <th>Firefox</th>
+    <th>Chrome</th>
+    <th>Safari</th>
+    <th>IE</th>
+    <th>Other</th>
   </tr>
 
+  <tr>
+    <td id="firefox"><%= @firefox_users %></td>
+    <td id="chrome"><%= @chrome_users %></td>
+    <td id="safari"><%= @safari_users %></td>
+    <td id="ie"><%= @ie_users %></td>
+    <td id="other"><%= @other_users %></td>
+  </tr>
+</table>
+<!-- 
   <tr>
     <td>
       Firefox:
@@ -80,9 +95,18 @@ New vs. Returning Visitors:<br>
 
   <tr>
     <td>
+      Other:
+    </td>
+    <td id="other"> 
+      <%= @other_users %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
       Total page views:
     </td>
     <td>
       <%= Visitor.total_pageviews %>
     </td>
-  </tr>
+  </tr> -->

@@ -7,5 +7,6 @@ class DashboardController < ApplicationController
     @chrome_users = Visitor.all.where(browser: "Chrome").count
     @safari_users = Visitor.all.where(browser: "Safari").count
     @ie_users = Visitor.all.where(browser: "Internet Explorer").count
+    @other_users = Visitor.all.where(browser: "Other").count
   end
 end
