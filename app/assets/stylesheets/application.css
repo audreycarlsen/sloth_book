@@ -147,4 +147,21 @@ h1 {
 
 .analytics_table {
   text-align: center;
+  border: 1px solid black;
+  border-collapse: collapse;
+  background: white;
+}
+
+.analytics_table td, .analytics_table th {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.analytics_table th {
+  background: #48d1cc;
+}
+
+.analytics_container {
+  display: inline-block;
+  margin-right: 90px;
 }

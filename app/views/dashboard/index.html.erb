@@ -3,7 +3,7 @@
 <table>
   <tr>
     <td><h2>New vs. Returning Visitors</h2></td>
-    <td><h2>New vs. Returning Visitors</h2></td>
+    <td><h2>Most Popular Browsers</h2></td>
   </tr>
   <tr>
     <td><canvas class="canvas" id="canvas" width=400 height=232></canvas></td>
@@ -11,102 +11,50 @@
   </tr>
 </table>
 
-<table class="analytics_table">
-  <tr>
-    <th>Site Visits</th>
-    <th>Page Views</th>
-    <th>Unique Visitors</th>
-  </tr>
+<br><br>
 
-  <tr>
-    <td><%= Visitor.total_visits %></td>
-    <td>
-      <%= Visitor.total_pageviews %>
-    </td>
-    <td><%= @unique_visitors %></td>
-  </tr>
+<div class="analytics_container">
+  <p><strong>Visits and Views</strong></p>
+  <table class="analytics_table">
+    <tr>
+      <th>Site Visits</th>
+      <th>Page Views</th>
+      <th>Unique Visitors</th>
+    </tr>
 
-  <tr>
-    <td></td>
-    <td></td>
-    <td>(<span id="new_vis"><%= @new_visitors %></span> new)</td>
-  </tr>
+    <tr>
+      <td><%= Visitor.total_visits %></td>
+      <td>
+        <%= Visitor.total_pageviews %>
+      </td>
+      <td>
+        <%= @unique_visitors %> total<br>
+        (<span id="new_vis"><%= @new_visitors %></span> new)<br>
+        (<span id="ret_vis"><%= @returning_visitors %></span> returning)
+      </td>
+    </tr>
+  </table>
+</div>
 
-  <tr>
-    <td></td>
-    <td></td>
-    <td>(<span id="ret_vis"><%= @returning_visitors %></span> returning)</td>
-  </tr>
-</table>
+<div class="analytics_container">
+  <p><strong>Browser Usage</strong></p>
+  <table class="analytics_table">
+    <tr>
+    </tr>
+    <tr>
+      <th>Firefox</th>
+      <th>Chrome</th>
+      <th>Safari</th>
+      <th>IE</th>
+      <th>Other</th>
+    </tr>
 
-<table class="analytics_table">
-  <tr>
-    <th>Firefox</th>
-    <th>Chrome</th>
-    <th>Safari</th>
-    <th>IE</th>
-    <th>Other</th>
-  </tr>
-
-  <tr>
-    <td id="firefox"><%= @firefox_users %></td>
-    <td id="chrome"><%= @chrome_users %></td>
-    <td id="safari"><%= @safari_users %></td>
-    <td id="ie"><%= @ie_users %></td>
-    <td id="other"><%= @other_users %></td>
-  </tr>
-</table>
-<!-- 
-  <tr>
-    <td>
-      Firefox:
-    </td>
-    <td id="firefox">
-      <%= @firefox_users %>
-    </td>
-  </tr>
-
-  <tr>
-    <td>
-      Chrome:
-    </td>
-    <td id="chrome">
-      <%= @chrome_users %>
-    </td>
-  </tr>
-
-  <tr>
-    <td>
-      Safari:
-    </td>
-    <td id="safari">
-      <%= @safari_users %>
-    </td>
-  </tr>
-
-  <tr>
-    <td>
-      Internet Explorer:
-    </td>
-    <td id="ie"> 
-      <%= @ie_users %>
-    </td>
-  </tr>
-
-  <tr>
-    <td>
-      Other:
-    </td>
-    <td id="other"> 
-      <%= @other_users %>
-    </td>
-  </tr>
-
-  <tr>
-    <td>
-      Total page views:
-    </td>
-    <td>
-      <%= Visitor.total_pageviews %>
-    </td>
-  </tr> -->
+    <tr>
+      <td id="firefox"><%= @firefox_users %></td>
+      <td id="chrome"><%= @chrome_users %></td>
+      <td id="safari"><%= @safari_users %></td>
+      <td id="ie"><%= @ie_users %></td>
+      <td id="other"><%= @other_users %></td>
+    </tr>
+  </table>
+</div>

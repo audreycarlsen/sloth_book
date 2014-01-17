@@ -157,6 +157,10 @@
     context2.fillText( "Internet Explorer" , 325, 155 );
     context2.fillText( "Other" , 325, 185 );
 
+    // Text
+
+    
+
   });
 
 }());
