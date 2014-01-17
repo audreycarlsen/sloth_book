@@ -6,7 +6,7 @@
     <td><h2>Most Popular Browsers</h2></td>
   </tr>
   <tr>
-    <td><canvas class="canvas" id="canvas" width=400 height=240></canvas></td>
+    <td><canvas class="canvas" id="canvas" width=400 height=240>JavaScript not supported by this browser.</canvas></td>
     <td><canvas class="canvas" id="canvas2" width=500 height=250></canvas></td>
   </tr>
 </table>
@@ -34,6 +34,7 @@
       </td>
     </tr>
   </table>
+  <p>Average page views per visit: <%= (Visitor.total_pageviews.to_f / Visitor.total_visits.to_f).round(2) %></p>
 </div>
 
 <div class="analytics_container">

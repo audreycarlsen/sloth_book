@@ -164,4 +164,5 @@ h1 {
 .analytics_container {
   display: inline-block;
   margin-right: 90px;
+  vertical-align: top;
 }
